@@ -15,3 +15,6 @@ handlers:
 
 vars:
 	ansible-playbook playbooks/vars-playbook.yml -i inventory.ini -u sergeikiss
+
+nginx:
+	ansible-playbook playbooks/nginx-playbook.yml -i inventory.ini -u sergeikiss
