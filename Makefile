@@ -12,3 +12,6 @@ tags:
 
 handlers:
 	ansible-playbook playbooks/handlers-playbook.yml -i inventory.ini -u sergeikiss
+
+vars:
+	ansible-playbook playbooks/vars-playbook.yml -i inventory.ini -u sergeikiss
