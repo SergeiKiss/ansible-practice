@@ -1,0 +1,35 @@
+- hosts: webservers
+
+  tasks:
+    - name: Update and upgrade apt packages
+      apt:
+        upgrade: yes
+        update_cache: true
+      become: true
+      tags: update
+
+    - name: install git
+      apt:
+        name: git
+        state: present
+        update_cache: yes
+      become: true
+      tags: [install, git]
+
+    - name: install nodejs
+      apt:
+        name: nodejs
+        state: present
+        update_cache: yes
+      become: true
+      tags: [install, nodejs]
+
+    - name: create user
+      user:
+        name: tony
+      tags: [user, tony]
+
+    - name: create user
+      user:
+        name: tirion
+      tags: [user, tirion]
