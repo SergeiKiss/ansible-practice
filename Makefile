@@ -9,3 +9,6 @@ ugit:
 
 tags:
 	ansible-playbook playbooks/tags-playbook.yml -i inventory.ini -u sergeikiss
+
+handlers:
+	ansible-playbook playbooks/handlers-playbook.yml -i inventory.ini -u sergeikiss
