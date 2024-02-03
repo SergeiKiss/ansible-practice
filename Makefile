@@ -18,3 +18,6 @@ vars:
 
 nginx:
 	ansible-playbook playbooks/nginx-playbook.yml -i inventory.ini -u sergeikiss
+
+loop:
+	ansible-playbook playbooks/loop-playbook.yml -i inventory.ini -u sergeikiss

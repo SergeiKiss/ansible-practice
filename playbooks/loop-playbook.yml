@@ -1,0 +1,27 @@
+- hosts: all
+  vars: 
+    users:
+      - jaime
+      - sansa
+      - robert
+  tasks:
+    - name: add test users
+      user:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ users }}"
+      become: true
+
+    - name: create gitconfigs
+      template:
+        src: ../templates/.gitconfig.j2
+        dest: "/home/{{ item }}/.gitconfig"
+      loop: "{{ users }}"
+      become: true
+
+    - name: add ssh keys
+      ansible.posix.authorized_key:
+        key: "{{ lookup('file', '../files/id_rsa.pub') }}"
+        user: "{{ item }}"
+      loop: "{{ users }}"
+      become: true
