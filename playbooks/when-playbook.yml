@@ -1,0 +1,25 @@
+- hosts: whenservers
+  tasks:
+    - name: create user
+      user:
+        name: tony
+      tags: [user, tony]
+      become: yes
+
+    - name: install git (Ubuntu)
+      apt:
+        name: git
+        state: present
+        update_cache: yes
+      become: yes
+      tags: [install, git]
+      when: ansible_os_family == "Debian"
+
+    - name: install git (CentOS)
+      yum:
+        name: git
+        state: present
+        update_cache: yes
+      become: yes
+      tags: [install, git]
+      when: ansible_distribution == "CentOS"

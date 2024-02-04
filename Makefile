@@ -21,3 +21,6 @@ nginx:
 
 loop:
 	ansible-playbook playbooks/loop-playbook.yml -i inventory.ini -u sergeikiss
+
+when:
+	ansible-playbook playbooks/when-playbook.yml -i inventory.ini -u sergeikiss
