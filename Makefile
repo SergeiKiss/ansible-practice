@@ -24,3 +24,6 @@ loop:
 
 when:
 	ansible-playbook playbooks/when-playbook.yml -i inventory.ini -u sergeikiss
+
+filter:
+	ansible-playbook playbooks/filter-playbook.yml -i inventory.ini -u sergeikiss

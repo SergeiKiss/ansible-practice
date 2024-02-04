@@ -1,0 +1,31 @@
+- hosts: webservers
+  vars:
+    nginx_port: 80
+    root_dir: /var/tmp/www
+    msg: "This is server {{ server_name }}!"
+  tasks:
+    - name: create root dir
+      file:
+        path: '{{root_dir}}'
+        state: directory
+
+    - name: update nginx config
+      template:
+        src: ../templates/nginx.conf.j2
+        dest: "{{root_dir}}/nginx.conf"
+      notify:
+        - restart nginx
+      become: true
+
+    - name: update index.html
+      template:
+        src: ../templates/index.html.j2
+        dest: "{{root_dir}}/index.html"
+      become: true
+
+  handlers:
+    - name: restart nginx
+      service:
+        name: nginx
+        state: reloaded
+      become: true
