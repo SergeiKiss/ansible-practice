@@ -27,3 +27,6 @@ when:
 
 filter:
 	ansible-playbook playbooks/filter-playbook.yml -i inventory.ini -u sergeikiss
+
+register:
+	ansible-playbook playbooks/register-playbook.yml -i inventory.ini -u sergeikiss
