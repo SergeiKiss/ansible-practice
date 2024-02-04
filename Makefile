@@ -30,3 +30,6 @@ filter:
 
 register:
 	ansible-playbook playbooks/register-playbook.yml -i inventory.ini -u sergeikiss
+
+role:
+	ansible-playbook playbooks/roles-playbook.yml -i inventory.ini -u sergeikiss

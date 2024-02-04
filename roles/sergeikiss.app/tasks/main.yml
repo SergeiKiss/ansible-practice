@@ -1,0 +1,31 @@
+---
+- name: install cowsay
+  apt:
+    name: cowsay
+    state: present
+    update_cache: yes
+  become: true
+
+- name: eval cowsay
+  shell: cowsay {{ msg }}
+  register: cowsay_result
+  become_user: sergeikiss
+
+- name: create root dir
+  file:
+    path: '{{root_dir}}'
+    state: directory
+
+- name: update nginix config
+  template:
+    src: ./templates/nginx.conf.j2
+    dest: "{{root_dir}}/nginx.conf"
+  notify:
+    - restart nginx
+  become: true
+
+- name: update index.html
+  template:
+    src: ./templates/index.html.j2
+    dest: "{{root_dir}}/index.html"
+  become: true
