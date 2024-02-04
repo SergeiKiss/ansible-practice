@@ -36,3 +36,6 @@ role:
 
 coll:
 	ansible-playbook playbooks/collection-playbook.yml -i inventory.ini -u sergeikiss
+
+vault:
+	ansible-playbook playbooks/vault-playbook.yml -i inventory.ini --ask-vault-pass -u sergeikiss

@@ -1,0 +1,61 @@
+- hosts: webservers
+  vars:
+    nginx_port: 80
+    root_dir: /var/tmp/www
+    msg: "This is server {{ server_name }}!"
+  tasks:
+    - name: create user
+      user:
+        name: tony
+      tags: [user, tony]
+      become: true
+
+    - name: create user
+      user:
+        name: tirion
+      tags: [user, tirion]
+      become: true
+
+    - name: add ssh key
+      authorized_key:
+        key: "{{ ssh_public_key }}"
+        user: tony
+      become: true
+      tags: [ssh, tony]
+  
+    - name: install cowsay
+      apt:
+        name: cowsay
+        state: present
+        update_cache: yes
+      become: yes
+
+    - name: eval cowsay
+      shell: cowsay {{ msg }}
+      register: cowsay_result
+
+    - name: create root dir
+      file:
+        path: '{{root_dir}}'
+        state: directory
+
+    - name: update nginix config
+      template:
+        src: ../templates/nginx.conf.j2
+        dest: "{{root_dir}}/nginx.conf"
+      notify:
+        - restart nginx
+      become: true
+
+    - name: update index.html
+      template:
+        src: ../templates/index.html.j2
+        dest: "{{root_dir}}/index.html"
+      become: true
+
+  handlers:
+    - name: restart nginx
+      service:
+        name: nginx
+        state: reloaded
+      become: true
