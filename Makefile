@@ -33,3 +33,6 @@ register:
 
 role:
 	ansible-playbook playbooks/roles-playbook.yml -i inventory.ini -u sergeikiss
+
+coll:
+	ansible-playbook playbooks/collection-playbook.yml -i inventory.ini -u sergeikiss
